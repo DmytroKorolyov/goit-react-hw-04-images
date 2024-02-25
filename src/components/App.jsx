@@ -21,16 +21,14 @@ const App = () => {
   
   
 useEffect(() => {
-    // Перевіряємо, чи введено запит, та чи не є сторінка порожньою за замовчуванням
     if (searchQuery && isDefaultPage) {
-      setIsDefaultPage(false); // Якщо так, встановлюємо значення isDefaultPage на false
+      setIsDefaultPage(false); 
     }
     
-    // Перевіряємо, чи searchQuery не порожній, тоді виконуємо функцію fetchImages
     if (searchQuery) {
       fetchImages();
     }
-  }, [searchQuery]); // Спрацьовує при зміні searchQuery
+  }, [searchQuery]); 
   
   const fetchImages = async () => {
     setIsLoading(true);
@@ -66,7 +64,7 @@ useEffect(() => {
   return (
     <div className={s.app}>
       <Searchbar handleSetQuery={handleSetQuery} />
-      {!isDefaultPage && ( // Відображаємо ImageGallery, якщо сторінка не є порожньою за замовчуванням
+      {!isDefaultPage && ( 
         <ImageGallery images={images} onItemClick={handleOpenModal} />
       )}
       {isLoading && <Loader />}
@@ -168,9 +166,9 @@ export default App
 //     page: 1,
 //     query: '',
 //     searchPerformed: false,
-//     showLoadMoreButton: false, // Додали новий стан
-//     showModal: false, // Стан для показу модального вікна
-//     selectedImage: null // Стан для зберігання обраного зображення
+//     showLoadMoreButton: false, 
+//     showModal: false, 
+//     selectedImage: null 
 //   }
 
 //   async componentDidMount() {
@@ -192,7 +190,7 @@ export default App
 //         images: [...prev.images, ...hits],
 //         totalImages: total,
 //         loading: false,
-//         showLoadMoreButton: hits.length > 0 && prev.searchPerformed // Показуємо кнопку, якщо отримано нові зображення
+//         showLoadMoreButton: hits.length > 0 && prev.searchPerformed 
 //       }));
 //     } catch (error) {
 //       this.setState({ error, loading: false });
@@ -207,12 +205,10 @@ export default App
 //     this.setState(prev => ({ page: prev.page + 1 }));
 //   }
 
-//   // Метод для відкриття модального вікна
 //   handleOpenModal = image => {
 //     this.setState({ showModal: true, selectedImage: image });
 //   }
 
-//   // Метод для закриття модального вікна
 //   handleCloseModal = () => {
 //     this.setState({ showModal: false, selectedImage: null });
 //   }
@@ -222,10 +218,10 @@ export default App
 //     return (
 //       <div>
 //         <Searchbar handleSetQuery={this.handleSetQuery} />
-//         {searchPerformed && <ImageGallery hits={images} handleOpenModal={this.handleOpenModal} />} {/* Передаємо метод handleOpenModal у властивість */}
+//         {searchPerformed && <ImageGallery hits={images} handleOpenModal={this.handleOpenModal} />} {}
 //         {loading && <Loader />}
 //         {showLoadMoreButton && images.length > 0 && <Button handleLoadMore={this.handleLoadMore} />}
-//         {showModal && selectedImage && ( /* Відображаємо модальне вікно тільки якщо воно відкрите і є обране зображення */
+//         {showModal && selectedImage && ( 
 //           <Modal selectedImage={selectedImage} handleCloseModal={this.handleCloseModal} />
 //         )}
 //       </div>
