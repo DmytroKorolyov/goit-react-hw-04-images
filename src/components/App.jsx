@@ -1,3 +1,25 @@
+
+
+
+
+
+
+
+
+// тест
+
+
+
+
+
+
+
+
+
+
+
+// --------------- Працює---------------------------
+
 import React, { useEffect, useState, useCallback } from 'react';
 import s from './styles/styles.module.css';
 import { fetchImagesWithQuery } from '../api';
@@ -42,18 +64,9 @@ const App = () => {
     setSearchQuery(query);
   };
 
-  const handleLoadMoreImages = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const additionalImages = await fetchImagesWithQuery(searchQuery, page);
-      setImages(prevImages => [...prevImages, ...additionalImages]);
-      setPage(prevPage => prevPage + 1);
-    } catch (error) {
-      console.error('Error fetching more images:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [searchQuery, page]);
+  const handleLoadMoreImages = () => {
+    fetchImages();
+  };
 
   const handleOpenModal = imageURL => {
     setShowModal(true);
@@ -83,94 +96,6 @@ const App = () => {
 };
 
 export default App;
-
-
-
-
-
-
-
-// тест
-
-
-
-
-
-
-
-
-
-
-
-// --------------- Працює---------------------------
-
-// const App = () => {
-//   const [images, setImages] = useState([]);
-//   const [page, setPage] = useState(1);
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [showModal, setShowModal] = useState(false);
-//   const [largeImageURL, setLargeImageURL] = useState('');
-//   const [searchQuery, setSearchQuery] = useState('');
-//   const [isDefaultPage, setIsDefaultPage] = useState(true);
-
-//   useEffect(() => {
-//     if (searchQuery && isDefaultPage) {
-//       setIsDefaultPage(false);
-//     }
-//     if (searchQuery) {
-//       fetchImages();
-//     }
-//   }, [searchQuery, isDefaultPage]);
-
-//   const fetchImages = async () => {
-//     setIsLoading(true);
-//     try {
-//       const newImages = await fetchImagesWithQuery(searchQuery, page);
-//       setImages(prevImages => [...prevImages, ...newImages]);
-//       setPage(prevPage => prevPage + 1);
-//     } catch (error) {
-//       console.error('Error fetching images:', error);
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-//   const handleSetQuery = query => {
-//     setSearchQuery(query);
-//   };
-
-//   const handleLoadMoreImages = () => {
-//     fetchImages();
-//   };
-
-//   const handleOpenModal = imageURL => {
-//     setShowModal(true);
-//     setLargeImageURL(imageURL);
-//   };
-
-//   const handleCloseModal = () => {
-//     setShowModal(false);
-//     setLargeImageURL('');
-//   };
-
-//   return (
-//     <div className={s.app}>
-//       <Searchbar handleSetQuery={handleSetQuery} />
-//       {!isDefaultPage && (
-//         <ImageGallery images={images} onItemClick={handleOpenModal} />
-//       )}
-//       {isLoading && <Loader />}
-//       {images.length > 0 && !isLoading && (
-//         <Button onClick={handleLoadMoreImages} />
-//       )}
-//       {showModal && (
-//         <Modal largeImageURL={largeImageURL} onClose={handleCloseModal} />
-//       )}
-//     </div>
-//   );
-// };
-
-// export default App;
 
 
 
