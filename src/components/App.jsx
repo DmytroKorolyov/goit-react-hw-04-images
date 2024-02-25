@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import s from './styles/styles.module.css';
 import { fetchImagesWithQuery } from '../api';
 import ImageGallery from './ImageGallery/ImageGallery';
@@ -42,9 +42,18 @@ const App = () => {
     setSearchQuery(query);
   };
 
-  const handleLoadMoreImages = () => {
-    fetchImages();
-  };
+  const handleLoadMoreImages = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const additionalImages = await fetchImagesWithQuery(searchQuery, page);
+      setImages(prevImages => [...prevImages, ...additionalImages]);
+      setPage(prevPage => prevPage + 1);
+    } catch (error) {
+      console.error('Error fetching more images:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [searchQuery, page]);
 
   const handleOpenModal = imageURL => {
     setShowModal(true);
@@ -74,7 +83,6 @@ const App = () => {
 };
 
 export default App;
-
 
 
 
