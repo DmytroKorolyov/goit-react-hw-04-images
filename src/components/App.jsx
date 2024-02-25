@@ -18,18 +18,16 @@ const App = () => {
   const [largeImageURL, setLargeImageURL] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [isDefaultPage, setIsDefaultPage] = useState(true);
-  
-  
-useEffect(() => {
+
+  useEffect(() => {
     if (searchQuery && isDefaultPage) {
-      setIsDefaultPage(false); 
+      setIsDefaultPage(false);
     }
-    
     if (searchQuery) {
       fetchImages();
     }
-  }, [searchQuery]); 
-  
+  }, [searchQuery, isDefaultPage]);
+
   const fetchImages = async () => {
     setIsLoading(true);
     try {
@@ -60,11 +58,11 @@ useEffect(() => {
     setShowModal(false);
     setLargeImageURL('');
   };
-  
+
   return (
     <div className={s.app}>
       <Searchbar handleSetQuery={handleSetQuery} />
-      {!isDefaultPage && ( 
+      {!isDefaultPage && (
         <ImageGallery images={images} onItemClick={handleOpenModal} />
       )}
       {isLoading && <Loader />}
@@ -72,14 +70,12 @@ useEffect(() => {
         <Button onClick={handleLoadMoreImages} />
       )}
       {showModal && (
-        <Modal
-          largeImageURL={largeImageURL}
-          onClose={handleCloseModal}
-        />
+        <Modal largeImageURL={largeImageURL} onClose={handleCloseModal} />
       )}
     </div>
   );
 };
+
 
 
 
