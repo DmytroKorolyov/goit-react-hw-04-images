@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-
-import s from '../styles/styles.module.css'
+import s from '../styles/styles.module.css';
 
 const Modal = ({ largeImageURL, onClose }) => {
   useEffect(() => {
@@ -32,8 +31,8 @@ const Modal = ({ largeImageURL, onClose }) => {
   );
 };
 
+export default Modal;
 
-export default Modal
 
 
 

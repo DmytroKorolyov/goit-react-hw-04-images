@@ -2,27 +2,76 @@ import axios from 'axios';
 
 const baseURL = 'https://pixabay.com/api/';
 
-const apiKey = '42004606-5d03e591d800e1e125ea1f7b1';
-
 export const fetchImagesWithQuery = async (searchQuery, page) => {
   try {
     const response = await axios.get(baseURL, {
       params: {
-        key: apiKey,
+        key: '42004606-5d03e591d800e1e125ea1f7b1',
         q: searchQuery,
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: 'true',
-        page,
+        page: page,
         per_page: 12,
       },
     });
     return response.data.hits;
   } catch (error) {
     console.error('Error fetching images:', error);
-    throw error; // Re-throw the error to handle it in the component
+    return [];
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import axios from 'axios';
+
+// const baseURL = 'https://pixabay.com/api/';
+
+// const apiKey = '42004606-5d03e591d800e1e125ea1f7b1';
+
+// export const fetchImagesWithQuery = async (searchQuery, page) => {
+//   try {
+//     const response = await axios.get(baseURL, {
+//       params: {
+//         key: apiKey,
+//         q: searchQuery,
+//         image_type: 'photo',
+//         orientation: 'horizontal',
+//         safesearch: 'true',
+//         page,
+//         per_page: 12, // Set per_page to 12 for 12 images per page
+//       },
+//     });
+//     return response.data.hits;
+//   } catch (error) {
+//     console.error('Error fetching images:', error);
+//     throw error; // Re-throw the error to handle it in the component
+//   }
+// };
 
 
 

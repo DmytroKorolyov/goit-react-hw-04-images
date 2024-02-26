@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
-
-import s from '../styles/styles.module.css'
-
+import React, { useState, useEffect } from 'react';
+import s from '../styles/styles.module.css';
+import fetchImagesWithQuery from '../../api';
 
 const Searchbar = ({ handleSetQuery }) => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleChangeSearchInput = e => {
-    const { value } = e.target;
-    setSearchValue(value);
+    setSearchValue(e.target.value);
   };
 
   const handleSearchFormSubmit = e => {
     e.preventDefault();
-    if (searchValue) {
-      handleSetQuery(searchValue);
+    if (searchValue.trim()) {
+      handleSetQuery(searchValue.trim());
       setSearchValue('');
     }
   };
@@ -27,7 +25,6 @@ const Searchbar = ({ handleSetQuery }) => {
         </button>
         <input
           type="text"
-          name="searchValue"
           value={searchValue}
           onChange={handleChangeSearchInput}
           autoComplete="off"
@@ -39,8 +36,11 @@ const Searchbar = ({ handleSetQuery }) => {
   );
 };
 
+export default Searchbar;
 
-export default Searchbar
+
+
+
 
 
 

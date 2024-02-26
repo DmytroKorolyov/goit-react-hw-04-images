@@ -29,7 +29,11 @@ const App = () => {
     setIsLoading(true);
     try {
       const newImages = await fetchImagesWithQuery(searchQuery, page);
-      setImages(prevImages => [...prevImages, ...newImages]);
+      if (page === 1) {
+        setImages(newImages);
+      } else {
+        setImages(prevImages => [...prevImages, ...newImages]);
+      }
       setPage(prevPage => prevPage + 1);
     } catch (error) {
       console.error('Error fetching images:', error);
@@ -39,8 +43,8 @@ const App = () => {
   };
 
   const handleSetQuery = query => {
-    setImages([]); // Clear images array when new search query is set
-    setPage(1); // Reset page number to 1
+    setImages([]);
+    setPage(1);
     setSearchQuery(query);
   };
 
@@ -76,6 +80,15 @@ const App = () => {
 };
 
 export default App;
+
+
+
+
+
+
+
+
+
 
 
 
